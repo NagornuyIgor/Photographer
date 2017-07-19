@@ -1,0 +1,16 @@
+﻿.photo-size {
+    width: 15vw;
+    height: 12vw
+}
+
+.photos {
+    display: inline-flex;
+    position: relative;
+}
+
+.del-photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px 5px 0 0;
+}
