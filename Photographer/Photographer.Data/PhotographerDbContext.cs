@@ -12,5 +12,10 @@ namespace PhotographerPerformance.Data
     {
         public DbSet<Photographer> Photographers { get; set; }
         public DbSet<Photo> Photos { get; set; }
+
+        public PhotographerDbContext() 
+            : base("PhotographerDbContext")
+        {
+        }
     }
 }

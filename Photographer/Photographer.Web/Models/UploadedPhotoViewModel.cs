@@ -8,6 +8,6 @@ namespace PhotographerPerformance.Models
 {
     public class UploadedPhotoViewModel
     {
-        HttpContent content { get; set; }
+        public HttpContent Content { get; set; }
     }
 }

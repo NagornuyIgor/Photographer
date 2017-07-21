@@ -107,8 +107,6 @@ namespace PhotographerPerformance.Data
             int? skip = null,
             int? take = null)
         {
-            var context = new DbContext("");
-
             IQueryable<TEntity> query = Table;
 
             if (filter != null)

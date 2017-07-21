@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using PhotographerPerformance.Services;
+using PhotographerPerformance.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +20,12 @@ namespace PhotographerPerformance
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<DtoMapperProfile>();
+                cfg.AddProfile<ViewModelMapperProfile>();
+            });
         }
     }
 }

@@ -9,7 +9,7 @@ namespace PhotographerPerformance.Services.Dto
 {
     public class UploadedPhotoDto
     {
-        public HttpContent content { get; set; }
+        public HttpContent Content { get; set; }
     }
 }
 

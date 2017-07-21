@@ -15,7 +15,7 @@ namespace PhotographerPerformance.Controllers
     {
         private readonly IPhotographerService photographerService;
 
-        PhotographersController(IPhotographerService photographerService)
+        public PhotographersController(IPhotographerService photographerService)
         {
             this.photographerService = photographerService;
         }
@@ -41,12 +41,12 @@ namespace PhotographerPerformance.Controllers
         }
 
         // POST api/delete
-        [HttpPost]
-        public HttpResponseMessage Delete(int id)
-        {
-            photographerService.Delete(id);
+        //[HttpPost]
+        //public HttpResponseMessage Delete(int id)
+        //{
+        //    photographerService.Delete(id);
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
-        }
+        //    return new HttpResponseMessage(HttpStatusCode.OK);
+        //}
     }
 }

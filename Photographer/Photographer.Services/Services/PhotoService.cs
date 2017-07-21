@@ -22,42 +22,43 @@ namespace PhotographerPerformance.Services
 
     public class PhotoService : IPhotoService
     {
-        private readonly PhotoRepository repository;
+        private readonly IPhotoRepository photoRepository;
 
-        PhotoService(PhotoRepository repository)
+        public PhotoService(IPhotoRepository photoRepository)
         {
-            this.repository = repository;
+            this.photoRepository = photoRepository;
         }
 
         public IList<PhotoDto> Get(int photographerId)
         {
-            var photos = repository.Get(p => p.PhotographerId == photographerId);
+            var photos = photoRepository.Get(p => p.PhotographerId == photographerId);
 
             return Mapper.Map<IList<PhotoDto>>(photos);
         }
 
         public void Add(UploadedPhotoDto uploadedPhotoDto)
         {
-            var photo = Mapper.Map<Photo>(ParseMultipartAsync(uploadedPhotoDto.content));
-            repository.Create(photo);
-            repository.Save();
+            var photo = Mapper.Map<Photo>(ParseMultipartAsync(uploadedPhotoDto.Content));
+
+            photoRepository.Create(photo);
+            photoRepository.Save();
         }
 
         public void Delete(int id)
         {
-            var photoDto = Mapper.Map<PhotoDto>(repository.Get(i => i.Id == id));
+            var photo = photoRepository.GetById(id);
 
             try
             {
-                File.Delete($"\\Photographer.Web\\App_Data\\PhotographersPhotos\\{photoDto.ImageName}");
+                File.Delete($"\\Photographer.Web\\App_Data\\PhotographersPhotos\\{photo.Name}");                
             }
             catch(Exception ex)
             {
                 throw ex;
             }
 
-            repository.Delete(id);
-            repository.Save();
+            photoRepository.Delete(id);
+            photoRepository.Save();
         }
 
 

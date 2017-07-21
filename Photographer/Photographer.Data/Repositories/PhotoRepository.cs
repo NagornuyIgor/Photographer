@@ -8,9 +8,13 @@ using System.Data.Entity;
 
 namespace PhotographerPerformance.Data.Repositories
 {
-    public class PhotoRepository : Repository<Photo>
+    public interface IPhotoRepository : IRepository<Photo>
     {
-        PhotoRepository(DbContext context)
+    }
+
+    public class PhotoRepository : Repository<Photo>, IPhotoRepository
+    {
+        public PhotoRepository(DbContext context)
             :base(context) { }
     }
 }

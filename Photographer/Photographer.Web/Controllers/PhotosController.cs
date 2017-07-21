@@ -10,16 +10,21 @@ using System.Collections.Generic;
 
 namespace PhotographerPerformance.Controllers
 {
-    public class HomeController : ApiController
+    public class PhotosController : ApiController
     {
         private readonly IPhotoService photoService;
 
-        HomeController(IPhotoService photoService)
+        public PhotosController(IPhotoService photoService)
         {
             this.photoService = photoService;
         }
 
-        public IHttpActionResult Index(int photographerId)
+        public IHttpActionResult Get()
+        {
+            return Redirect("/api/Photographers");
+        }
+
+        public IHttpActionResult Get(int photographerId)
         {
             var photos = new PhotoViewModel
             {

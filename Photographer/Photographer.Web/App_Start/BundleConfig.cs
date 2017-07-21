@@ -23,7 +23,11 @@ namespace PhotographerPerformance
                 "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/Scripts/app/app.module.js"
+                "~/Scripts/app/app.module.js",
+                "~/Scripts/app/Photo/photo.controller.js",
+                "~/Scripts/app/Photo/photo.service.js",
+                "~/Scripts/app/Photographer/photographer.controller.js",
+                "~/Scripts/app/Photographer/photographer.service.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

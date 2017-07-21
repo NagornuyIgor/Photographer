@@ -12,39 +12,61 @@ namespace PhotographerPerformance.Services
 {
     public interface IPhotographerService
     {
-        //PhotographerDto GetOne(); Do i need this? 
         IList<PhotographerDto> GetAll();
         void Add(PhotographerDto photographer);
         void Delete(int id);
+        void Get(int id);
     }
 
     public class PhotographerService : IPhotographerService
     {
-        private readonly PhotographerRepository repository;
+        private readonly IPhotographerRepository photographerRepository;
+        private readonly IPhotoRepository photoRepository;
 
-        public PhotographerService(PhotographerRepository repository)
+        public PhotographerService(IPhotographerRepository photographerRepository, IPhotoRepository photoRepository)
         {
-            this.repository = repository;
+            this.photographerRepository = photographerRepository;
+            this.photoRepository = photoRepository;
         }
 
         public IList<PhotographerDto> GetAll()
         {
-            var photographers = repository.GetAll(q => q.OrderBy(p => p.Id)).ToList();
+            var photographers = photographerRepository.GetAll(q => q.OrderBy(p => p.Id)).ToList();
+            var photo = photoRepository.GetAll(q => q.OrderBy(p => p.Id)).ToList();
 
-            return Mapper.Map<IList<PhotographerDto>>(photographers);
+            //foreach (var photographer in photographers)
+            //{
+            //    photographer.PictureCount = photo.Count(p => p.PhotographerId == photographer.Id);
+
+
+            //}
+
+            return photographers.Select(p => new PhotographerDto
+            {
+                Name = p.Name,
+                BirthDate = p.BirthDate,
+                PictureCount = photo.Count(q => q.PhotographerId == p.Id)
+            }).ToList();
+
+            //return Mapper.Map<IList<PhotographerDto>>(photographers);
         }
 
         public void Add(PhotographerDto photographerDto)
         {
             var photographer = Mapper.Map<Photographer>(photographerDto);
-            repository.Create(photographer);
-            repository.Save();
+            photographerRepository.Create(photographer);
+            photographerRepository.Save();
         }
 
         public void Delete(int id)
         {
-            repository.Delete(id);
-            repository.Save();
+            photographerRepository.Delete(id);
+            photographerRepository.Save();
+        }
+
+        public void Get(int photographerId)
+        {
+            var photographerDto = photographerRepository.Get(p => p.Id == photographerId);
         }
     }
 }

@@ -17,20 +17,21 @@
 
         </header>
 
-        <div ng-app="app" class="container">
+        <section ng-app="app" class="container">
             @RenderBody()
-        </div>
+        </section>
         <footer>
             <p class="text-center">@DateTime.Now.Year - Photographer</p>
         </footer>
     </div>
-    
+
     @Scripts.Render("~/bundles/angular")
 
     @Scripts.Render("~/bundles/app")
 
     @Scripts.Render("~/bundles/bootstrap")
-   
+
     @RenderSection("scripts", false)
+
 </body>
 </html>
