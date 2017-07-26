@@ -34,26 +34,19 @@ namespace PhotographerPerformance.Services
             var photographers = photographerRepository.GetAll(q => q.OrderBy(p => p.Id)).ToList();
             var photo = photoRepository.GetAll(q => q.OrderBy(p => p.Id)).ToList();
 
-            //foreach (var photographer in photographers)
-            //{
-            //    photographer.PictureCount = photo.Count(p => p.PhotographerId == photographer.Id);
-
-
-            //}
-
             return photographers.Select(p => new PhotographerDto
             {
+                Id = p.Id,
                 Name = p.Name,
                 BirthDate = p.BirthDate,
                 PictureCount = photo.Count(q => q.PhotographerId == p.Id)
             }).ToList();
-
-            //return Mapper.Map<IList<PhotographerDto>>(photographers);
         }
 
         public void Add(PhotographerDto photographerDto)
         {
             var photographer = Mapper.Map<Photographer>(photographerDto);
+
             photographerRepository.Create(photographer);
             photographerRepository.Save();
         }

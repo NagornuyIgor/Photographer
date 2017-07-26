@@ -1,6 +1,11 @@
 ﻿.photo-size {
-    width: 15vw;
-    height: 12vw
+    width: 100%;
+    max-height: 12vw;
+    vertical-align: central;
+}
+
+.container-size {
+    max-width: 12vw;
 }
 
 .photos {

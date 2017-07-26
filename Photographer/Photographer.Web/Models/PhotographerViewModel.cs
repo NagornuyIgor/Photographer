@@ -8,6 +8,9 @@ namespace PhotographerPerformance.Models
 {
     public class PhotographerViewModel
     {
+        public string Name { get; set; }
+        public DateTime BirthDate { get; set; }
+
         public IList<PhotographerDto> Photographers { get; set; }
     }
 }

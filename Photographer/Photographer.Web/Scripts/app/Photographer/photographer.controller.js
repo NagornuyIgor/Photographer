@@ -3,30 +3,45 @@
 
     angular
         .module('app')
-        .controller('photographerController', [photographerController]);
+        .controller('photographerController', photographerController);
 
-    photographerController.$inject = ['photographerService', '$http'];
+    photographerController.$inject = ['photographerService', 'dataService', '$http'];
 
-    function photographerController(photographerService, $http) {
+    function photographerController(photographerService, dataService, $http) {
 
         var vm = this;
 
-        vm.newPhotographer = {};
+        vm.newPhotographer = {
+            Name: '',
+            BirthDate: null
+        };
 
         vm.photographers = [];
 
         vm.getInfo = getInfo;
         vm.add = add;
+        //vm.set = set;
 
         function getInfo() {
-            $http.get('/api/photographers').then(function (responce) {
-                vm.photographers = responce.data;
+            $http.get('/api/Photographers').then(function (response) {
+                vm.photographers = response.data;
+
+                vm.newPhotographer = {
+                    Name: '',
+                    BirthDate: null
+                };
             });
         }
 
         function add() {
-            photographerService.addPhotographer(vm.newPhotographer);/*.then(getInfo());*/
+            photographerService.addPhotographer(vm.newPhotographer).then(function () {
+                getInfo();
+            });
         }
+
+        //function set(photographer) {
+        //    dataService.setPhotographer(photographer);
+        //}
     }
 
 })();

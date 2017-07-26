@@ -10,18 +10,20 @@ using AutoMapper;
 using System.Net.Http;
 using System.IO;
 using System.Drawing;
+using System.Web;
 
 namespace PhotographerPerformance.Services
 {
     public interface IPhotoService
     {        
         IList<PhotoDto> Get(int photographerId);
-        void Add(UploadedPhotoDto photo);
+        void Add(PhotoDto photoDto);
         void Delete(int id);
     }
 
     public class PhotoService : IPhotoService
     {
+        private readonly string workingFolder = HttpRuntime.AppDomainAppPath + @"Uploads\";
         private readonly IPhotoRepository photoRepository;
 
         public PhotoService(IPhotoRepository photoRepository)
@@ -33,12 +35,17 @@ namespace PhotographerPerformance.Services
         {
             var photos = photoRepository.Get(p => p.PhotographerId == photographerId);
 
+            //foreach(var path in photos)
+            //{
+            //    path.Name = workingFolder + path.Name;
+            //}
+
             return Mapper.Map<IList<PhotoDto>>(photos);
         }
 
-        public void Add(UploadedPhotoDto uploadedPhotoDto)
+        public void Add(PhotoDto photoDto)
         {
-            var photo = Mapper.Map<Photo>(ParseMultipartAsync(uploadedPhotoDto.Content));
+            var photo = Mapper.Map<Photo>(photoDto);
 
             photoRepository.Create(photo);
             photoRepository.Save();
@@ -50,7 +57,7 @@ namespace PhotographerPerformance.Services
 
             try
             {
-                File.Delete($"\\Photographer.Web\\App_Data\\PhotographersPhotos\\{photo.Name}");                
+                File.Delete(workingFolder + photo.Name);                
             }
             catch(Exception ex)
             {
@@ -59,31 +66,6 @@ namespace PhotographerPerformance.Services
 
             photoRepository.Delete(id);
             photoRepository.Save();
-        }
-
-
-        public async Task<PhotoDto> ParseMultipartAsync(HttpContent postedContent)
-        {
-            var photoDto = new PhotoDto();
-            var provider = await postedContent.ReadAsMultipartAsync();   
-
-            foreach (var content in provider.Contents)
-            {
-                if (!string.IsNullOrEmpty(content.Headers.ContentDisposition.FileName))
-                {
-                    photoDto.PhotographerId = int.Parse(content.Headers.ContentDisposition.Name.Trim('"'));
-                    photoDto.ImageName = content.Headers.ContentDisposition.FileName.Trim('"');
-                    var file = await content.ReadAsByteArrayAsync();
-                    using (var ms = new MemoryStream(file))
-                    {
-                        //var img = Image.FromStream(ms);
-                        //img.Save($"\\Photographer.Web\\App_Data\\PhotographersPhotos\\{photoDto.ImageName}");
-                        Image.FromStream(ms).Save($"\\Photographer.Web\\App_Data\\PhotographersPhotos\\{photoDto.ImageName}");
-                    }
-                }
-            }
-
-            return photoDto;
         }
     }
 }

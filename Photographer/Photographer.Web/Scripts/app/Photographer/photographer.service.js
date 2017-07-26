@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .factory('photographerService', [photographerService]);
+        .factory('photographerService', photographerService);
 
     photographerService.$inject = ['$http'];
 
@@ -16,7 +16,9 @@
         return service;
 
         function addPhotographer(photographer) {
-            return $http.post('Add', photographer);
+            return $http.post('/api/photographers/Add', photographer).then(function (status) {
+                    console.log(status);
+            });
         }
     }
 

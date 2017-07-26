@@ -3,10 +3,37 @@
 
     angular
         .module('app')
-        .service('photoService', [photoService]);
+        .factory('photoService', photoService);
 
-    function photoService() {
+    photoService.$inject = ['$http', 'Upload'];
 
+    function photoService($http, Upload) {
+
+        var service = {
+            getPhotos: getPhotos,
+            upload: upload,
+            deletePhoto: deletePhoto
+        };
+
+        return service;
+
+        function getPhotos(PhotographerId) {
+            return $http.get('/api/Photos/' + PhotographerId);   
+        }
+
+        function upload(Content) {
+            Upload.upload({
+                url: '/api/Photos/Add',
+                data: { Content: Content }
+            }).then(function (status) {
+                console.log(status);
+            });
+        }
+
+        function deletePhoto(id) {
+
+            return $http.delete('/api/Photos/', { params: { id: id }});
+        }
     }
 
 })();

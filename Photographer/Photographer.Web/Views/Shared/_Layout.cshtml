@@ -24,12 +24,15 @@
             <p class="text-center">@DateTime.Now.Year - Photographer</p>
         </footer>
     </div>
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
 
     @Scripts.Render("~/bundles/angular")
 
-    @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/angularPlugins")
 
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/app")
 
     @RenderSection("scripts", false)
 

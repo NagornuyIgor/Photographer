@@ -186,6 +186,7 @@
     <Compile Include="Controllers\PerformanceController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\PhotographersController.cs" />
+    <Compile Include="Extensions\CustomMultipartFromDataStreamProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,6 +222,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\app\data.service.js" />
     <Content Include="Scripts\app\Photographer\photographer.controller.js" />
     <Content Include="Scripts\app\Photographer\photographer.service.js" />
     <Content Include="Scripts\app\Photo\photo.service.js" />
@@ -234,6 +236,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ng-file-upload.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -275,7 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\PhotographersPhotos\" />
-    <Folder Include="Views\Default\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
