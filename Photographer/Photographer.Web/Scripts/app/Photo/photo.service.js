@@ -22,11 +22,9 @@
         }
 
         function upload(Content) {
-            Upload.upload({
+            return Upload.upload({
                 url: '/api/Photos/Add',
                 data: { Content: Content }
-            }).then(function (status) {
-                console.log(status);
             });
         }
 

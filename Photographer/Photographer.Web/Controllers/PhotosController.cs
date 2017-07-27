@@ -26,11 +26,6 @@ namespace PhotographerPerformance.Controllers
             this.photoService = photoService;
         }
 
-        //public IHttpActionResult Get()
-        //{
-        //    return Json(1);
-        //}
-
         [HttpGet]
         public IHttpActionResult Get(int id)
         {

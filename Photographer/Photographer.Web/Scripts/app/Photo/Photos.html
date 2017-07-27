@@ -1,0 +1,55 @@
+﻿<!-- Photos.html -->
+<form class="container">
+    <div class="panel panel-default" ng-init="vm.getPhotos()">
+        <div class="panel-body">
+            <div>
+                <div class="container-fluid">
+                    <h2 class="text-center">{{vm.params.photographerName}}</h2>
+                </div>
+                <!--<div class="row">
+                    <div class="col-md-3">
+                        <div class="trumbnail photos container-size">
+                            <label for="file-input">
+                                <img class="photo-size" src="Content/Images/Custom-Icon-Design-Mono-General-4-Upload.ico" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" ng-repeat="photo in vm.photos.Photos">
+                        <div class="thumbnail photos container-size">
+                            <img class="photo-size" ng-src="/Uploads/{{photo.Name}}" />
+                            <span class="del-photo glyphicon glyphicon-remove" ng-click="vm.deletePhoto(photo.Id)"></span>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="item-size photos">
+                            <label for="file-input">
+                                <img class="image-size" src="Content/Images/Custom-Icon-Design-Mono-General-4-Upload.ico" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" ng-repeat="photo in vm.photos.Photos">
+                        <div class="item-size photos">
+                            <img class="image-size" ng-src="/Uploads/{{photo.Name}}" />
+                            <span class="del-photo glyphicon glyphicon-remove" ng-click="vm.deletePhoto(photo.Id)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid text-center">
+                <ul class="pagination">
+                    <li><a href="#">1</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <input id="file-input" type="file" ngf-select="vm.uploadPhoto($files)" style="display: none"
+           name="photo" accept="image/jpeg,image/png,image/gif" ngf-max-size="2MB">
+
+    <!--ngf-select="vm.uploadPhoto($Content)"--> 
+</form>

@@ -8,13 +8,8 @@ namespace PhotographerPerformance.Web.Controllers
 {
     public class PerformanceController : Controller
     {
-        // GET: Default
-        public ActionResult Photographers()
-        {
-            return View();
-        }
-
-        public ActionResult Photos()
+        // GET: Performance
+        public ActionResult Index()
         {
             return View();
         }

@@ -20,10 +20,9 @@
 
         vm.getInfo = getInfo;
         vm.add = add;
-        //vm.set = set;
 
         function getInfo() {
-            $http.get('/api/Photographers').then(function (response) {
+            photographerService.getPhotographers().then(function (response) {
                 vm.photographers = response.data;
 
                 vm.newPhotographer = {
@@ -38,10 +37,6 @@
                 getInfo();
             });
         }
-
-        //function set(photographer) {
-        //    dataService.setPhotographer(photographer);
-        //}
     }
 
 })();

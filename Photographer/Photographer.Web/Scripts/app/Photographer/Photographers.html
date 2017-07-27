@@ -1,0 +1,48 @@
+﻿<!-- Photographers.html -->
+<form class="container">
+    <div class="panel panel-default" ng-init="vm.getInfo()">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" ng-model="vm.newPhotographer.Name">
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="date">Birth date:</label>
+                            <input type="date" class="form-control" id="date" ng-model="vm.newPhotographer.BirthDate">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-default pull-right" ng-click="vm.add()">Add</button>
+        </div>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Birth date</th>
+                    <th>Picture count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="photographer in vm.photographers.Photographers">
+                    <td><a href="/#!/{{photographer.Name}}/{{photographer.Id}}">{{photographer.Name}}</a></td>
+                    <td>{{photographer.BirthDate | date:'dd-MM-yyyy'}}</td>
+                    <td>{{photographer.PictureCount}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container-fluid text-center">
+        <ul class="pagination">
+            <li><a href="#">1</a></li>
+        </ul>
+    </div>
+</form>
