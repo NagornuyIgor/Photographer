@@ -1,6 +1,6 @@
 ﻿<!-- Photographers.html -->
 <form class="container">
-    <div class="panel panel-default" ng-init="vm.getInfo()">
+    <div class="panel panel-default" ng-init="vm.pageLoad()">
         <div class="panel-body">
             <div class="row">
                 <div class="form-inline">
@@ -32,7 +32,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="photographer in vm.photographers.Photographers">
+                <tr ng-repeat="photographer in vm.photographers.Photographers |
+                    appFilter: vm.currentPage*vm.itemsPerPage |
+                    limitTo: vm.itemsPerPage">
                     <td><a href="/#!/{{photographer.Name}}/{{photographer.Id}}">{{photographer.Name}}</a></td>
                     <td>{{photographer.BirthDate | date:'dd-MM-yyyy'}}</td>
                     <td>{{photographer.PictureCount}}</td>
@@ -42,7 +44,15 @@
     </div>
     <div class="container-fluid text-center">
         <ul class="pagination">
-            <li><a href="#">1</a></li>
+            <li ng-class="vm.disablePrevPage()">
+                <a href ng-click="vm.prevPage()">« Prev</a>
+            </li>
+            <li ng-repeat="index in vm.range()" ng-class="{active: index == vm.currentPage}" ng-click="vm.setPage(index)">
+                <a href="#">{{index+1}}</a>
+            </li>
+            <li ng-class="vm.disableNextPage()">
+                <a href ng-click="vm.nextPage()">Next »</a>
+            </li>
         </ul>
     </div>
 </form>

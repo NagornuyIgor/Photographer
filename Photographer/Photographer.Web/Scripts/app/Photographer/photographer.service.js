@@ -17,12 +17,14 @@
         return service;
 
         function getPhotographers() {
-            return $http.get('/api/Photographers');
+            return $http.get('/api/Photographers').then(function (response) {
+                return response.data;
+            });
         }
 
         function addPhotographer(photographer) {
             return $http.post('/api/photographers/Add', photographer).then(function (status) {
-                    console.log(status);
+                console.log(status);
             });
         }
     }

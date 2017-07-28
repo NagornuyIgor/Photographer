@@ -24,16 +24,18 @@
     color: red;
 }
 
-
 .image-size {
     max-width: 100%;
-    height: auto;
+    height: 200px;
 }
 
+.image-size:active {
+    opacity: 0.7;
+} 
+    
 .item-size {
     width: 200px;
-    min-height: 200px;
-    max-height: 200px;
+    height: 200px;
     float: left;
     margin: 3px;
     padding: 3px;

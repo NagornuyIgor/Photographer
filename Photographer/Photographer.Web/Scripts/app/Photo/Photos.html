@@ -6,22 +6,7 @@
                 <div class="container-fluid">
                     <h2 class="text-center">{{vm.params.photographerName}}</h2>
                 </div>
-                <!--<div class="row">
-                    <div class="col-md-3">
-                        <div class="trumbnail photos container-size">
-                            <label for="file-input">
-                                <img class="photo-size" src="Content/Images/Custom-Icon-Design-Mono-General-4-Upload.ico" />
-                            </label>
-                        </div>
-                    </div>
 
-                    <div class="col-md-3" ng-repeat="photo in vm.photos.Photos">
-                        <div class="thumbnail photos container-size">
-                            <img class="photo-size" ng-src="/Uploads/{{photo.Name}}" />
-                            <span class="del-photo glyphicon glyphicon-remove" ng-click="vm.deletePhoto(photo.Id)"></span>
-                        </div>
-                    </div>
-                </div>-->
                 <div class="row">
                     <div class="col-md-3">
                         <div class="item-size photos">
@@ -30,26 +15,36 @@
                             </label>
                         </div>
                     </div>
-
-                    <div class="col-md-3" ng-repeat="photo in vm.photos.Photos">
+                    <div class="col-md-3" ng-repeat="photo in vm.photos.Photos |
+                        appFilter: vm.currentPage*vm.itemsPerPage |
+                        limitTo: vm.itemsPerPage">
                         <div class="item-size photos">
-                            <img class="image-size" ng-src="/Uploads/{{photo.Name}}" />
+                            <a href="/Uploads/{{photo.Name}}" target="_blank" download>
+                                <img class="image-size" ng-src="/Uploads/{{photo.Name}}" />
+                            </a>
                             <span class="del-photo glyphicon glyphicon-remove" ng-click="vm.deletePhoto(photo.Id)"></span>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="container-fluid text-center">
                 <ul class="pagination">
-                    <li><a href="#">1</a></li>
+                    <li ng-class="vm.disablePrevPage()">
+                        <a href="/#!/{{vm.params.photographerName}}/{{vm.params.photographerId}}" ng-click="vm.prevPage()">« Prev</a>
+                    </li>
+                    <li ng-repeat="index in vm.range()" ng-class="{active: index == vm.currentPage}" ng-click="vm.setPage(index)">
+                        <a href="/#!/{{vm.params.photographerName}}/{{vm.params.photographerId}}">{{index+1}}</a>
+                    </li>
+                    <li ng-class="vm.disableNextPage()">
+                        <a href="/#!/{{vm.params.photographerName}}/{{vm.params.photographerId}}" ng-click="vm.nextPage()">Next »</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 
+    <button type="button" ng-click="vm.download('73a346b1-49b1-4b12-a0b0-5341452a10d2.jpg')">Test</button>
+
     <input id="file-input" type="file" ngf-select="vm.uploadPhoto($files)" style="display: none"
            name="photo" accept="image/jpeg,image/png,image/gif" ngf-max-size="2MB">
-
-    <!--ngf-select="vm.uploadPhoto($Content)"--> 
 </form>

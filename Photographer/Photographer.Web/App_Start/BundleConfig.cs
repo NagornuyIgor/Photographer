@@ -30,7 +30,8 @@ namespace PhotographerPerformance
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/app/app.module.js",
-                "~/Scripts/app/data.service.js",
+                "~/Scripts/app/pagination.service.js",
+                "~/Scripts/app/app.filter.js",
                 "~/Scripts/app/Photo/photo.controller.js",
                 "~/Scripts/app/Photo/photo.service.js",
                 "~/Scripts/app/Photographer/photographer.controller.js",

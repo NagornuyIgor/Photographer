@@ -29,7 +29,6 @@
         }
 
         function deletePhoto(id) {
-
             return $http.delete('/api/Photos/', { params: { id: id }});
         }
     }
